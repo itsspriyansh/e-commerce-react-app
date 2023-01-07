@@ -1,0 +1,10 @@
+header {
+    display: flex;
+    justify-content: center;
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(50, 77, 80);
+}
+
