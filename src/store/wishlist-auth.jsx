@@ -27,7 +27,6 @@ const wishlistSlice = createSlice ({
                 })
                 state.items = newItems
             }
-            console.log (state.items.some (item => item.id === action.payload.id))
         }
     }
 })

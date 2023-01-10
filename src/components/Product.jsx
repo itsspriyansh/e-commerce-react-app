@@ -1,22 +1,24 @@
 import classes from "./Product.module.css";
 import Card from "../UI/Card";
-import { BsFillBookmarkHeartFill, BsCartPlusFill } from "react-icons/bs"
+import { BsFillBookmarkHeartFill, BsCartPlusFill, BsBookmarkXFill } from "react-icons/bs"
 import { useDispatch } from "react-redux";
 import { wishlistActions } from "../store/wishlist-auth";
+import { useSelector } from "react-redux";
 
 function Product ({id, name, price}) {
 
     const dispatch = useDispatch()
-    
-    function wishlistClickHandler () {
-        dispatch (wishlistActions.wishlistHandler({id, name, price}))
-    }
+    const items = useSelector(state => state.wishlist.items)
 
+    const inWishlist = () => items.some (item => item.id === id)
+    const wishlistClickHandler = () => dispatch (wishlistActions.wishlistHandler({id, name, price}))
+    
 
     return (
         <Card>
         <li className={classes.item}>
-                <BsFillBookmarkHeartFill className={classes.wishListIcon} onClick={wishlistClickHandler}/>
+                {inWishlist() && <BsBookmarkXFill className={classes.wishListIcon} onClick={wishlistClickHandler}/>}
+                {!inWishlist() && <BsFillBookmarkHeartFill className={classes.wishListIcon} onClick={wishlistClickHandler}/>}
             <div className={classes.image}>
                 <img src="https://thumbs.dreamstime.com/b/product-icon-collection-trendy-modern-flat-linear-vector-white-background-thin-line-outline-illustration-130947207.jpg"/>
             </div>
