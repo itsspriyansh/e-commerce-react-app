@@ -8,12 +8,14 @@ function ProductList (props) {
             <div className={classes.notesList}>
 
                 {props.products.map(productDetails => {
-                    return <Product 
+                    return (
+                        <Product 
                         key={productDetails.id} 
                         id={productDetails.id} 
                         name={productDetails.name}
                         price={productDetails.price}
-                    />
+                        />
+                    )
                 })}
 
             </div>
