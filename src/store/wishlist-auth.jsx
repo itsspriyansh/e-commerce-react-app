@@ -12,15 +12,22 @@ const wishlistSlice = createSlice ({
             return itemIsPresent
         },
         wishlistHandler (state, action) {
+
             const existingItem = state.items.find (item => item.id === action.payload.id)
             
             if (!existingItem) {
                 state.items.push(action.payload)
                 state.totalItems++
             } else {
-                const newState = state.items.filter (item => item === action.payload)
-                state.items = newState
+                const newItems = []
+                state.items.map (item => {
+                    if (item.id !== action.payload.id) {
+                        newItems.push (item)
+                    }
+                })
+                state.items = newItems
             }
+            console.log (state.items.some (item => item.id === action.payload.id))
         }
     }
 })

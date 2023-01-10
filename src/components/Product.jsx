@@ -11,7 +11,7 @@ function Product ({id, name, price}) {
     function wishlistClickHandler () {
         dispatch (wishlistActions.wishlistHandler({id, name, price}))
     }
-    
+
 
     return (
         <Card>
