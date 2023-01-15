@@ -1,11 +1,11 @@
 import React from 'react'
 import classes from "../components/ProductsList.module.css"
 import Product from '../components/Product';
-import { useSelector } from 'react-redux';
+import useWishlist from '../store/store';
 
-function WishList(props) {
+function WishList () {
 
-    const wishlistItems = useSelector (state => state.wishlist.items)
+    const wishlist = useWishlist(state => state.wishlist)
 
     return (
         <div>
@@ -15,7 +15,7 @@ function WishList(props) {
             <div className={classes.container}>
                 <div className={classes.notesList}>
                     {
-                    wishlistItems.map (product => {
+                    wishlist.map (product => {
                         return (
                             <Product 
                             key={product.id} 
