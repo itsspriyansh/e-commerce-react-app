@@ -14,6 +14,7 @@ function ProductList (props) {
                         id={productDetails.id} 
                         name={productDetails.name}
                         price={productDetails.price}
+                        url={productDetails.url}
                         />
                     )
                 })}

@@ -1,18 +1,25 @@
 import classes from "./Product.module.css";
 import Card from "../UI/Card";
 import { BsFillBookmarkHeartFill, BsCartPlusFill, BsBookmarkXFill } from "react-icons/bs"
-import { useDispatch } from "react-redux";
-import { wishlistActions } from "../store/wishlist-auth";
-import { useSelector } from "react-redux";
+import useWishlist from "../store/store";
 
-function Product ({id, name, price}) {
+function Product ({id, name, price, url}) {
 
-    const dispatch = useDispatch()
-    const items = useSelector(state => state.wishlist.items)
+    const addToWishlist = useWishlist( state => state.addToWishlist)
+    const wishlist = useWishlist (state => state.wishlist)
+    const removeFromWishlist = useWishlist (state => state.removeFromWishlist)
 
-    const inWishlist = () => items.some (item => item.id === id)
-    const wishlistClickHandler = () => dispatch (wishlistActions.wishlistHandler({id, name, price}))
-    
+    const inWishlist = () => wishlist.some (item => item.id == id)
+
+    const wishlistClickHandler = () => {
+        const existing = wishlist.find (item => item.id == id)
+        if (!existing) {
+            addToWishlist({id, name, price})        
+        } else {
+            removeFromWishlist(id)
+        }
+    }
+
 
     return (
         <Card>
@@ -20,7 +27,7 @@ function Product ({id, name, price}) {
                 {inWishlist() && <BsBookmarkXFill className={classes.wishListIcon} onClick={wishlistClickHandler}/>}
                 {!inWishlist() && <BsFillBookmarkHeartFill className={classes.wishListIcon} onClick={wishlistClickHandler}/>}
             <div className={classes.image}>
-                <img src="https://thumbs.dreamstime.com/b/product-icon-collection-trendy-modern-flat-linear-vector-white-background-thin-line-outline-illustration-130947207.jpg"/>
+                <img src={url}/>
             </div>
             <div className={classes.content}>
                 <p>{name}</p>

@@ -10,7 +10,7 @@ function MainNavigation () {
                 <ul>
                     <li><Link to='/'>AllProducts</Link></li>
                     <li><Link to='/cart'>Cart</Link></li>
-                    <li><Link to='/wishlist'>WishList</Link></li>
+                    <li><Link to='/wishlist'>Wishlist</Link></li>
                     <li><Link to='/checkout'>Checkout</Link></li>
                 </ul>
             </nav>
